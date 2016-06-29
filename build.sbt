@@ -1,4 +1,4 @@
-organization := "com.cisco"
+organization := "com.freedomain"
 
 name := "scala-team-demo"
 version := "0.1"

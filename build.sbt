@@ -1,6 +1,6 @@
 organization := "com.freedomain"
 
-name := "scala-team-demo"
+name := "scala-features-examples"
 version := "0.1"
 
 scalaVersion := "2.11.6"
@@ -31,4 +31,3 @@ libraryDependencies ++= {
         "org.slf4j" % "jul-to-slf4j" % "1.7.5"
     )
 }
-

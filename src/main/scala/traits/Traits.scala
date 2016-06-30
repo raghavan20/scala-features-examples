@@ -12,9 +12,11 @@ object Traits extends App {
     })
 }
 
-case class Car(make: String, model: String, engineSize: Int) extends Loggable with Persistable
+case class Car(make: String, model: String, engineSize: Int) extends Auditable
 
-trait Loggable {
+trait Auditable extends Stdout with Persistable
+
+trait Stdout {
     self =>
     def log() = println(self.toString)
 }

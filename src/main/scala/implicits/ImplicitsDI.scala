@@ -3,7 +3,7 @@ package implicits
 object ImplicitsDI extends App {
     def print(x: String)(implicit formatter: Formatter) = formatter.format(x)
 
-    implicit val lowercaseFormatter = UppercaseFormatter
+    implicit val formatter = LowercaseFormatter
     println(print("hello guys"))
     println(print("welcome to scala"))
 }

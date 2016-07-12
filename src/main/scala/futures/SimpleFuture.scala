@@ -6,7 +6,7 @@ import scala.concurrent.duration.Duration
 
 object SimpleFuture extends App {
     implicit val ex = scala.concurrent.ExecutionContext.global
-    val f = Future {
+    val f: Future[Int] = Future {
         println(Thread.currentThread().getName)
         33
     }

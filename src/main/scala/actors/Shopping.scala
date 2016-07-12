@@ -17,10 +17,12 @@ object Shopping extends App {
     as.actorOf(Props(Dispatcher), "dispatcher")
     as.actorOf(Props(Emailer), "emailer")
 
-    for (i <- 1 to 6) shopper ! Shop
-
-
+    for (i <- 1 to 6)
+        shopper ! Shop
 }
+
+// checkout -> create order -> inventory check -> product reserved  -> dispatch -> send email
+//                                          `-> product unavailable -> save to backlog
 
 object Shop
 
@@ -34,7 +36,7 @@ case class OrderCreated(o: Order)
 
 case class Dispatched(o: Order)
 
-case class OrderMessage(product: Product)
+case class Checkout(product: Product)
 
 case class Order(product: Product, creationTime: Date = new Date()) {
     val id = OrderIdGenerator.get
@@ -56,7 +58,7 @@ object Shopper extends Actor {
     override def receive: Receive = {
         case shop =>
             val orderCreator = context.actorSelection("akka://shopping/user/orderCreator")
-            orderCreator ! OrderMessage(PS4)
+            orderCreator ! Checkout(PS4)
             println("sent order to buy ps4")
     }
 }
@@ -65,7 +67,7 @@ object OrderCreator extends Actor {
     val backlog = List()
 
     override def receive: Receive = {
-        case OrderMessage(p) =>
+        case Checkout(p) =>
             val o = Order(p)
             println(s"created order: $o")
             val inventory = context.actorSelection("akka://shopping/user/inventory")

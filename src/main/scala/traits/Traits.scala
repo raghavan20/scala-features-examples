@@ -1,6 +1,7 @@
 package traits
 
 import java.io.{File, FileWriter, PrintWriter}
+import java.nio.file.{Files, Paths}
 
 object Traits extends App {
     val c1 = Car("volks", "golf", 1600)
@@ -12,7 +13,7 @@ object Traits extends App {
     })
 }
 
-case class Car(make: String, model: String, engineSize: Int) extends Auditable
+case class Car(make: String, model: String, engineSize: Int)  extends Persistable with Stdout
 
 trait Auditable extends Stdout with Persistable
 

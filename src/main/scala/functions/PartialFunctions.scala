@@ -6,7 +6,7 @@ object PartialFunctions extends App {
 
     case class Box(length: Int, width: Int)
 
-    val h = hash(SillyHashers.hashers)_
+    val h: (Any) => Int = hash(SillyHashers.hashers)_
 
     println(h(33))
     println(h("hello scala"))

@@ -15,8 +15,8 @@ object Environments extends App {
 
 
     val secondToMillis = (s: String) => s.stripSuffix("s").toInt * 1000
-    val readTimeout = getEnv("read.timeout").orElse(Some("3s")).map(secondToMillis).get
-    val connTimeout = getEnv("conn.timeout").orElse(Some("1s")).map(secondToMillis).get
+    val readTimeout = getEnv("read.timeout").orElse(Some("3s")).map(secondToMillis)
+    val connTimeout = getEnv("conn.timeout").orElse(Some("100s")).map(secondToMillis).get
     println(s"read.timeout: $readTimeout ms")
     println(s"conn.timeout: $connTimeout ms")
 
